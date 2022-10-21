@@ -18,6 +18,10 @@ app.use("/product", productRouter);
 app.use("/categories", categoriesRouter);
 app.use("/newarrivels", newArrivelsRouter);
 
+app.get("/", async (req, res) => {
+  res.status(200).send("hihihihi");
+});
+
 //db connection
 mongoose.connect(process.env.MONGOCONNECTION, () => {
   console.log("mongodb is connected");
