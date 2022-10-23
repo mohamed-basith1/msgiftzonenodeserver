@@ -22,17 +22,16 @@ router.post("/register", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   const usercheck = await userSchema.findOne({ email: req.body.email });
-  console.log(res.body, "varuthu");
+
   if (!usercheck) {
     res.status(404).json("user is not found ");
   }
-  const checkpassword = await userSchema.find({ password: req.body.password });
 
-  if (!checkpassword) {
-    res.status(404).json("check your password");
-  }
-  if (usercheck && checkpassword) {
-    res.status(200).json("accesstrue");
+  if (usercheck) {
+    let checkpassword = usercheck.password == req.body.password;
+    if (checkpassword) {
+      res.status(200).json("accesstrue");
+    }
   }
 });
 
